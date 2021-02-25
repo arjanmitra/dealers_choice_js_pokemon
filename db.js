@@ -54,8 +54,8 @@ Pokemon.hasOne(Pokemon, {
   foreignKey: 'evolvedFromId',
 });
 
-Pokemon.belongsToMany(Trainer, { through: 'Pokemon_Trainers' });
 Trainer.belongsToMany(Pokemon, { through: 'Pokemon_Trainers' });
+Pokemon.belongsToMany(Trainer, { through: 'Pokemon_Trainers' });
 
 const seed = async () => {
   //region data
@@ -87,12 +87,15 @@ const seed = async () => {
   );
 
   arjan.regionId = 2;
+  arjan.class = 'software engineer in training';
   await arjan.save();
   zaina.regionId = 1;
   await zaina.save();
   manu.regionId = 3;
+  manu.class = 'software engineer in training';
   await manu.save();
   felicia.regionId = 2;
+  felicia.class = 'software engineer in training';
   await felicia.save();
   stanley.regionId = 1;
   await stanley.save();
