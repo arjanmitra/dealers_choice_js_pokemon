@@ -45,29 +45,49 @@ const trainers = async (id) => {
 };
 
 regionsParent.addEventListener('click', async (ev) => {
-  const regionTrainers = await trainers(ev.target.id);
-  renderTrainers(regionTrainers);
+  if (ev.target.id !== 'regions') {
+    const regionTrainers = await trainers(ev.target.id);
+    renderTrainers(regionTrainers);
+  }
 });
 
 const pokemons = async (id) => {
-  const returnedPokemons = (await axios.get(`/pokemon/${id}`)).data;
+  const returnedPokemons = (await axios.get(`/trainers/pokemon/${id}`)).data;
   return returnedPokemons[0].pokemons;
 };
 
 trainersParent.addEventListener('click', async (ev) => {
-  const trainersPokemon = await pokemons(ev.target.id);
-  console.log(trainersPokemon);
-  renderPokemons(trainersPokemon);
+  if (ev.target.id !== 'trainers') {
+    const trainersPokemon = await pokemons(ev.target.id);
+    renderPokemons(trainersPokemon);
+  }
 });
 
 pokemonParent.addEventListener('click', async (ev) => {
-  console.log(ev.target.className);
-  const pokemonPicData = (
-    await axios.get(`https://pokeapi.co/api/v2/pokemon/${ev.target.className}/`)
-  ).data;
-  const pokemonPicLink = pokemonPicData.sprites.front_default;
-  const pokemonPicDiv = `<img src = ${pokemonPicLink}>`;
-  pokemondata.innerHTML = pokemonPicDiv;
+  if (ev.target.id !== 'pokemon') {
+    const pokemonSelected = (await axios.get(`/pokemons/${ev.target.id}`)).data;
+    const evolution = pokemonSelected[0].evolvedFrom;
+    const pokemonPicData = (
+      await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${ev.target.className}/`
+      )
+    ).data;
+    const pokemonPicLink = pokemonPicData.sprites.front_default;
+    let pokemonPicDiv;
+    if (evolution) {
+      const evolutionPicData = (
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${evolution.name}/`)
+      ).data;
+      const evolutionPicLink = evolutionPicData.sprites.front_default;
+      pokemonPicDiv = `
+      <img src = ${pokemonPicLink}>
+      <br><br>evolved from<br><br><img src = ${evolutionPicLink}>
+      `;
+    } else {
+      pokemonPicDiv = `<img src = ${pokemonPicLink}>`;
+    }
+    pokemondata.innerHTML = pokemonPicDiv;
+  }
 });
 
 const init = async () => {

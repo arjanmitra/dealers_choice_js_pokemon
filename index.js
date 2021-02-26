@@ -69,7 +69,27 @@ app.get('/trainers/:id', async (req, res, next) => {
   }
 });
 
-app.get('/pokemon/:id', async (req, res, next) => {
+app.get('/pokemons/:id', async (req, res, next) => {
+  try {
+    res.send(
+      await Pokemon.findAll({
+        where: {
+          id: req.params.id,
+        },
+        include: [
+          {
+            model: Pokemon,
+            as: 'evolvedFrom',
+          },
+        ],
+      })
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/trainers/pokemon/:id', async (req, res, next) => {
   try {
     res.send(
       await Trainer.findAll({
@@ -79,6 +99,12 @@ app.get('/pokemon/:id', async (req, res, next) => {
         include: [
           {
             model: Pokemon,
+            include: [
+              {
+                model: Pokemon,
+                as: 'evolvedFrom',
+              },
+            ],
           },
           {
             model: Region,

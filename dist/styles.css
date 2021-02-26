@@ -1,7 +1,13 @@
 * {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 30px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
   text-align: center;
+
+  background: linear-gradient(-300deg, #ffcb05, #3d7dca, #003a70);
+  background-size: 400% 400%;
+  /* animation: gradient 10s ease infinite; */
 }
 
 #mainbody {
