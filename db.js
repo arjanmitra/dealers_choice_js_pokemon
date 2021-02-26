@@ -214,7 +214,7 @@ const seed = async () => {
 
   await arjan.addPokemons([pikachu.id, articuno.id, lugia.id, pichu.id]);
   await stanley.addPokemons([umbreon.id, charmander.id]);
-  await eliot.addPokemons([eevee.id, vaporeon.id]);
+  await eliot.addPokemons([eevee.id, vaporeon.id, charizard.id]);
   await thompson.addPokemons([zapdos.id, articuno.id, espeon.id]);
   await zaina.addPokemons([flareon.id, raichu.id]);
   await manu.addPokemons([pichu.id, vaporeon.id, espeon.id, lugia.id]);

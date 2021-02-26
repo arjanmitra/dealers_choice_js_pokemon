@@ -6,4 +6,5 @@ Instructions:
 2. `git clone` the repo to your machine.
 3. `npm install`.
 4. Set up the database in Postgres using the CLI function: `createdb dealers_choice_pokemon`.
-5. Open up `localhost:3002` in your browser.
+5. Run `npm run start:dev` in your CLI.
+6. Open up `localhost:3002` in your browser.
